@@ -320,11 +320,11 @@ fn main() {
     // beam_depthは最大でtだが，早く完成したほうがいいのと，seed=0で80万出してる人いるので，このときは0.4tとかでいいのかも
     // let beam_depth = t;
     let beam_depth = match n {
-        6 => t * 9 / 10,
-        7 => t * 8 / 10,
-        8 => t * 7 / 10,
-        9 => t * 6 / 10,
-        10 => t * 5 / 10,
+        6 => t,
+        7 => t * 9 / 10,
+        8 => t * 8 / 10,
+        9 => t * 7 / 10,
+        10 => t * 6 / 10,
         _ => unreachable!(),  
     };
     // 探索幅．各探索時点においていくつの状態を保持することができるか
@@ -352,7 +352,7 @@ fn main() {
                 // [TODO]確率的に現時点で悪い手も受け入れる？
                 let now_state = beam[depth].pop().unwrap();
                 let rand_float = rng.gen_range(0.0, 1.0);
-                while rand_float < 0.1 && !beam[depth].is_empty() {
+                while rand_float < 0.05 && !beam[depth].is_empty() {
                     let now_state = beam[depth].pop().unwrap();
                 }
                 // 取りうるアクションをすべて行う
